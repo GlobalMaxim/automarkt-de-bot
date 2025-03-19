@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime, timedelta
 from operator import and_
 from gino import Gino
@@ -24,13 +25,20 @@ class DuplicateArticleException(Exception):
 
 async def create_db():
     # Устанавливаем связь с базой данных
+    await asyncio.sleep(5)
     try:
+        # print(MYSQL_URI)
+        # print('Creating db')
+        logger.info('Creating db')
+        MYSQL_URI="postgresql://maxim:qwerty1998@db/automarkt_bot"
         await db.set_bind(MYSQL_URI)
-        db.gino: GinoSchemaVisitor
+        logger.info('DB Binded')
+        # connection = await db.pop_bind().acquire()
+        # db.gino: GinoSchemaVisitor
         await db.gino.create_all()
-        print('Database connected successfully')
-    except Exception:
-        logger.exception('Create database exception')
+        logger.info('Database connected successfully')
+    except Exception as e:
+        logger.exception(f'Create database exception: {str(e)}')
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -82,9 +90,15 @@ class Article(db.Model):
     #         self.id, self.user_id, self.title, self.description, self.price, self.type, self.location, self.photo, self.mobile_number, self.username)
     
 class DBCommands:
-    async def get_user(self, user_id):
-        user = await User.query.where(User.user_id == user_id).gino.first()
-        return user
+    async def get_user(self, user_id: int) -> User | None:
+        try:
+            user = await User.query.where(User.user_id == user_id).gino.first()
+            if user is None:
+                logger.warning(f'User with ID {user_id} not found.')
+            return user
+        except Exception as e:
+            logger.exception(f'Error fetching user with ID {user_id}: {e}')
+            return None
     
     async def add_new_user(self):
         cur_date = datetime.now()

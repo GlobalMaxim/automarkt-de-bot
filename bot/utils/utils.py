@@ -27,11 +27,11 @@ logger.addHandler(handler)
 # redis_client = redis.Redis()
 db = DBCommands()
 
-redis_client = redis.Redis()
+redis_client = redis.Redis(host='redis')
 
 def set_work_mode(mode):
     try:
-        with redis.Redis() as redis_client:
+        with redis.Redis(host='redis') as redis_client:
             redis_client.set('work_mode',mode)
     except Exception:
         logger.exception('Cannot change work mode')
@@ -180,7 +180,7 @@ async def send_notification_to_admin_about_new_post():
     try:
         articles: List[Article] = await db.get_non_reviewed_articles()
         if articles and len(articles) > 0:
-            with redis.Redis() as redis_client:
+            with redis.Redis(host='redis') as redis_client:
                 last_sent_notification = redis_client.get('last_sent_notification')
                 last_moderation = redis_client.get('last_moderation')
                 is_notif_in_2_hrs = int(redis_client.get('is_notificated_in_2_hrs')) == 1
@@ -207,7 +207,7 @@ async def send_notification_to_admin_about_new_post():
                 for admin in ADMIN_ID:
                     await bot.send_message(admin, _("У вас {} новых объявлений.\nЗайдите в модерацию для проверки.").format(len(articles)))
                     set_last_notification_time()
-                with redis.Redis() as redis_client:
+                with redis.Redis(host="redis") as redis_client:
                     redis_client.set('is_notificated_in_2_hrs', int(True))
             elif last_moderation_date and last_moderation_date > last_sent_notification_date:
                 print('4')
@@ -219,7 +219,7 @@ async def send_notification_to_admin_about_new_post():
 
 def set_last_moderation_time():
     try:
-        with redis.Redis() as redis_client:
+        with redis.Redis(host="redis") as redis_client:
             cur_datetime = datetime.now()
             redis_client.set('last_moderation', cur_datetime.strftime("%Y-%m-%d %H:%M:%S"))
             redis_client.set('is_notificated_in_2_hrs', int(False))
@@ -229,7 +229,7 @@ def set_last_moderation_time():
 
 def set_last_notification_time():
     try:
-        with redis.Redis() as redis_client:
+        with redis.Redis(host="redis") as redis_client:
             cur_datetime = datetime.now()
             redis_client.set('last_sent_notification', cur_datetime.strftime("%Y-%m-%d %H:%M:%S"))
     except Exception:

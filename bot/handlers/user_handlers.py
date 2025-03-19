@@ -389,69 +389,75 @@ async def __select_phone(msg: Message, state: FSMContext):
 
 @dp.message_handler(state=CreateArticleStates.CHECK)
 async def __accept_article(msg: Message, state: FSMContext):
-    data = await state.get_data()
-    article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
-    if msg.text == str(_("Да")):
-        article.created_at = datetime.now()
-        # is_duplicate = await db.check_article_duplicate(article)
-        if str(msg.from_user.id) in ADMIN_ID:
-            article.is_approved=True
-            article.is_reviewed=True
-            article.reviewed_at = datetime.now()
-            article = await article.create()   
-            await send_article_to_chanel(article)
-            message = _("Ваш пост опубликован в канале")
-            markup = admin_main_menu_markup
-            await bot.send_message(msg.from_user.id, message, reply_markup=markup)
-        elif str(msg.from_user.id) not in ADMIN_ID:
-            error_text = await check_article_for_errors(article)
-            if error_text:
-                message = error_text
-                markup = user_main_menu_markup
+    try:
+        data = await state.get_data()
+        article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
+        if msg.text == str(_("Да")):
+            article.created_at = datetime.now()
+            # is_duplicate = await db.check_article_duplicate(article)
+            if str(msg.from_user.id) in ADMIN_ID:
+                article.is_approved=True
+                article.is_reviewed=True
+                article.reviewed_at = datetime.now()
+                article = await article.create()   
+                await send_article_to_chanel(article)
+                message = _("Ваш пост опубликован в канале")
+                markup = admin_main_menu_markup
                 await bot.send_message(msg.from_user.id, message, reply_markup=markup)
-            else:
-                redis = redis_client.get('work_mode')
-                if redis:
-                    redis = redis.decode("utf-8")
-                
-                if redis and redis == 'auto':
-                    article.is_approved = True
-                    article.is_reviewed = True
-                    article.reviewed_at = datetime.now()
-                    article = await article.create()   
-                    mess = await send_article_to_chanel(article)
-                    message = _("Ваш пост опубликован в канале")
+            elif str(msg.from_user.id) not in ADMIN_ID:
+                error_text = await check_article_for_errors(article)
+                if error_text:
+                    message = error_text
                     markup = user_main_menu_markup
-                    user_id = article.user_id
-                    if isinstance(mess, list):
-                        sender_chat_id = mess[0].sender_chat.id
-                        mess_id = mess[0].message_id
-                    else:
-                        sender_chat_id = mess.sender_chat.id
-                        mess_id = mess.message_id
                     await bot.send_message(msg.from_user.id, message, reply_markup=markup)
-                    await bot.forward_message(user_id, sender_chat_id, mess_id)
                 else:
-                    article = await article.create()  
-                    message = _("Ваш пост отправлен на модерацию.\nКак только он будет проверен Администратором, вы получите уведомление")
-                    markup = user_main_menu_markup
-                    await bot.send_message(msg.from_user.id, message, reply_markup=markup)
-        
-    elif msg.text == _("Нет"):
-        await bot.send_message(msg.from_user.id, _("Создание поста отменено"), reply_markup=admin_main_menu_markup if str(msg.from_user.id) in ADMIN_ID else user_main_menu_markup)
-    await state.reset_state()
-    await state.reset_data()
+                    redis = redis_client.get('work_mode')
+                    if redis:
+                        redis = redis.decode("utf-8")
+                    
+                    if redis and redis == 'auto':
+                        article.is_approved = True
+                        article.is_reviewed = True
+                        article.reviewed_at = datetime.now()
+                        article = await article.create()   
+                        mess = await send_article_to_chanel(article)
+                        message = _("Ваш пост опубликован в канале")
+                        markup = user_main_menu_markup
+                        user_id = article.user_id
+                        if isinstance(mess, list):
+                            sender_chat_id = mess[0].sender_chat.id
+                            mess_id = mess[0].message_id
+                        else:
+                            sender_chat_id = mess.sender_chat.id
+                            mess_id = mess.message_id
+                        await bot.send_message(msg.from_user.id, message, reply_markup=markup)
+                        await bot.forward_message(user_id, sender_chat_id, mess_id)
+                    else:
+                        article = await article.create()  
+                        message = _("Ваш пост отправлен на модерацию.\nКак только он будет проверен Администратором, вы получите уведомление")
+                        markup = user_main_menu_markup
+                        await bot.send_message(msg.from_user.id, message, reply_markup=markup)
+            
+        elif msg.text == _("Нет"):
+            await bot.send_message(msg.from_user.id, _("Создание поста отменено"), reply_markup=admin_main_menu_markup if str(msg.from_user.id) in ADMIN_ID else user_main_menu_markup)
+        await state.reset_state()
+        await state.reset_data()
+    except Exception as e:
+        logger.info(f'Ошибка при создании поста: {str(e)}')
 
 @rate_limit(5)
 @dp.message_handler(Text(equals=[_("Мои объявления")]))
 async def __my_articles(msg: Message):
-    articles: List[Article] | None = await db.get_user_articles(msg.from_user.id)
-    articles.sort(key=lambda x: x.id)
-    if len(articles) > 0:
-        for key, article in enumerate(articles):
-            await send_article_to_chanel(article, msg.from_user.id)
-    else:
-        await bot.send_message(_('У вас нет активных объявлений 🥺'))
+    try:
+        articles: List[Article] | None = await db.get_user_articles(msg.from_user.id)
+        articles.sort(key=lambda x: x.id)
+        if len(articles) > 0:
+            for key, article in enumerate(articles):
+                await send_article_to_chanel(article, msg.from_user.id)
+        else:
+            await bot.send_message(msg.from_user.id, _('У вас нет активных объявлений 🥺'))
+    except Exception as e:
+        logger.info(f'Ошибка при отображении Моих обьявлений от пользователя {msg.from_user.id}: {str(e)}')
 
 @dp.message_handler(Text(equals=[_("Язык")]))
 async def __change_language(msg: Message, state: FSMContext):

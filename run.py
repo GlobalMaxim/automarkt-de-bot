@@ -1,5 +1,6 @@
 # from bot.loader import start_bot
 import asyncio
+import logging
 from aiogram import Dispatcher
 from bot.database.database import create_db
 from bot.config import TOKEN, ADMIN_ID
@@ -14,6 +15,10 @@ from bot.middleware.throttling_middleware import ThrottlingMiddleware
 
 from bot.utils.utils import send_notification_to_admin_about_new_post
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 async def scheduler():
     aioschedule.every(10).seconds.do(send_notification_to_admin_about_new_post)
     
@@ -22,10 +27,17 @@ async def scheduler():
         await asyncio.sleep(1)
 
 async def on_startup(dp: Dispatcher):
-    await bot.send_message(ADMIN_ID[0], "Bot was started successfully!")
-    await create_db()
-    await register_commands()
-    asyncio.create_task(scheduler())
+    try:
+        await bot.send_message(ADMIN_ID[0], "Bot was started successfully!")
+        # await asyncio.sleep(1)
+        logger.info('Bot started message sent.')
+
+        # print('smthsjk')
+        await create_db()
+        await register_commands()
+        asyncio.create_task(scheduler())
+    except Exception as e:
+        print(e)
 
 async def on_shutdown(dp: Dispatcher):
     await dp.storage.close()

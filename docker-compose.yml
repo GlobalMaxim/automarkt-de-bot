@@ -1,5 +1,14 @@
 version: '3.6'
 services:
+  app:
+    build: .
+    container_name: aiogram_app
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
   db:
     container_name: 'postgres-automarkt'
     image: 'postgres:14'
