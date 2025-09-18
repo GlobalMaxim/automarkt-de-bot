@@ -52,3 +52,7 @@ ADMIN_ID=123456789,987654321
 CHANEL_ID=987654321
 MYSQL_URI=mysql+pymysql://user:password@localhost:3306/dbname
 ```
+5. Run bot with
+```bash
+python3 run.py
+```
