@@ -56,3 +56,13 @@ MYSQL_URI=mysql+pymysql://user:password@localhost:3306/dbname
 ```bash
 python3 run.py
 ```
+---
+
+## Run with Docker Compose 🐳
+
+The project can also be launched using Docker Compose.  
+Make sure you have created a **.env** file with all required variables.
+
+### Start the services
+```bash
+docker compose up -d --build
