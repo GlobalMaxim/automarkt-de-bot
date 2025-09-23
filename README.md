@@ -22,6 +22,38 @@ Once an ad is submitted, it is automatically published to a specified Telegram c
 
 ---
 
+## How it works
+### Choose the language
+<p align="left">
+  <img width="367" height="161" alt="image" src="https://github.com/user-attachments/assets/4879b28d-ee2e-4515-9e87-9f9207e906ab" />
+</p>
+
+### Main menu
+<p align="left">
+  <img width="373" height="125" alt="image" src="https://github.com/user-attachments/assets/c1ce7203-ed2c-4932-841a-22822f8bd3a3" />
+</p>
+
+### Select category
+<p align="left">
+  <img width="373" height="160" alt="image" src="https://github.com/user-attachments/assets/7bf47eeb-a2a5-4782-be59-6a04c7ad4ba0" />
+</p>
+
+### Step-by-step creating add
+<p align="left">
+  <img width="370" height="174" alt="image" src="https://github.com/user-attachments/assets/bcc78b79-b55b-4628-afd7-d0b0a151977f" />
+
+</p>
+
+### Publish final result
+<p align="left">
+  <img width="308" height="567" alt="image" src="https://github.com/user-attachments/assets/49c44822-0c9e-47a5-a191-fc2e26ae029a" />
+
+</p>
+
+
+
+
+
 ## Installation  
 
 ### 1. Clone the repository  
