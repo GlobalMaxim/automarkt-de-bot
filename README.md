@@ -33,7 +33,7 @@ Once an ad is submitted, it is automatically published to a specified Telegram c
   <img width="373" height="125" alt="image" src="https://github.com/user-attachments/assets/c1ce7203-ed2c-4932-841a-22822f8bd3a3" />
 </p>
 
-### Select category
+### Select a category
 <p align="left">
   <img width="373" height="160" alt="image" src="https://github.com/user-attachments/assets/7bf47eeb-a2a5-4782-be59-6a04c7ad4ba0" />
 </p>
