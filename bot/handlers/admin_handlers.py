@@ -59,8 +59,8 @@ async def __moderation(msg: Message, state: FSMContext):
             article: Article = articles[0]
             await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
             text = get_sample_from_article(article)
-            article_number_text = _("Лот № {}\n\n").format(article.id)
-            text = article_number_text + text
+            # article_number_text = _("Лот № {}\n\n").format(article.id)
+            # text = article_number_text + text
             photos = json.loads(article.photo)['images']
             if len(photos) > 0:
                 await bot.send_media_group(msg.from_user.id, media=[InputMediaPhoto(m, caption=text if key == 0 else "",  parse_mode="HTML") for key, m in enumerate(photos)])

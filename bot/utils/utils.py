@@ -39,8 +39,8 @@ def set_work_mode(mode):
 async def send_article_to_chanel(article:Article, channel_id=CHANEL_ID):
     try:
         text = get_sample_from_article(article)
-        article_number_text = _("Лот № {}\n\n").format(article.id)
-        text = article_number_text + text
+        # article_number_text = _("Лот № {}\n\n").format(article.id)
+        # text = article_number_text + text
         # article_photos = article.photo
         photos = json.loads(article.photo)['images']
         if len(photos) > 0:
@@ -63,29 +63,29 @@ def get_sample_from_article(article: Article):
     if article.title:
         text_arr.append(f"{article.title}\n")
     if article.marka:
-        text_arr.append(f"{_('Марка: ')}{article.marka}\n")
+        text_arr.append(_("Марка: ") + article.marka + "\n")
     if article.model:
-        text_arr.append(f"{_('Модель: ')}{article.model}\n")
+        text_arr.append(_('Модель: ') + article.model + "\n")
     if article.year:
-        text_arr.append(f"{_('Год: ')}{article.year}\n")
+        text_arr.append(_('Год: ') + article.year+ "\n")
     if article.body_type:
-        text_arr.append(f"{_('Кузов: ')}{article.body_type}\n")
+        text_arr.append(_('Кузов: ') + article.body_type+ "\n")
     if article.engine_type:
-        text_arr.append(f"{_('Тип двигателя: ')}{article.engine_type}\n")
+        text_arr.append(_('Тип двигателя: ') + article.engine_type+ "\n")
     if article.engine_capacity:
-        text_arr.append(f"{_('Обьем двигателя: ')}{article.engine_capacity}\n")
+        text_arr.append(_('Обьем двигателя: ') + article.engine_capacity+ "\n")
     if article.tuf:
-        text_arr.append(f"{_('Тюф: ')}{article.tuf}\n")
+        text_arr.append(_('Тюф: ') + article.tuf+ "\n")
     if article.registration:
-        text_arr.append(f"{_('Регистрация авто: ')}{article.registration}\n")
+        text_arr.append(_('Регистрация авто: ') + article.registration+ "\n")
     if article.description:
         text_arr.append(f"{article.description}\n")
     if article.price:
-        text_arr.append(f"{_('Цена: ')}{article.price}\n")
+        text_arr.append(_('Цена: ') + article.price+ "\n")
     if article.location:
-        text_arr.append(f"{_('Местоположение: ')}{article.location}\n")
+        text_arr.append(_('Местоположение: ') + article.location+ "\n")
     if article.mobile_number:
-        text_arr.append(f"{_('Номер: ')}{article.mobile_number}\n")
+        text_arr.append(_('Номер: ') + article.mobile_number+ "\n")
     # print(article.username)
     if article.username and article.username != "@None":
         text_arr.append(article.username)

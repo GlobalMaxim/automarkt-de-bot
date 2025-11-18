@@ -466,8 +466,9 @@ async def __change_language(msg: Message, state: FSMContext):
     await state.set_data({"change_language":True})
 
 @dp.message_handler(Text(equals=[_("Номер телефона")]))
-async def __change_language(msg: Message, state: FSMContext):
-    await bot.send_message(msg.from_user.id, _("Введите номер"), reply_markup=get_tel_number())
+async def __change_phone_number(msg: Message, state: FSMContext):
+    lang = msg.from_user.language_code
+    await bot.send_message(msg.from_user.id, _("Введите номер"), reply_markup=get_tel_number(lang))
     await state.set_data({"change_number":True})
     await RegistrationStates.NUMBER.set()
 
