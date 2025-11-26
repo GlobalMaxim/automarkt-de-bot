@@ -35,7 +35,7 @@ settings_markup = ReplyKeyboardMarkup(
     keyboard=[
         [
             KeyboardButton(text=_("Язык")),
-            KeyboardButton(text=_("Номер телефона")),
+            # KeyboardButton(text=_("Номер телефона")),
             KeyboardButton(text=_("Режим работы бота"))
         ],
         [

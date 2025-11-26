@@ -6,7 +6,7 @@ class RegistrationStates(StatesGroup):
 
 class CreateArticleStates(StatesGroup):
     CATEGORY = State()
-    TITLE = State()
+    # TITLE = State()
     MARKA = State()
     MODEL = State()
     YEAR = State()

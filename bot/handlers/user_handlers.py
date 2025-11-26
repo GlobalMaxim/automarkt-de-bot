@@ -63,13 +63,13 @@ async def __set_language(call: CallbackQuery, state: FSMContext):
         await bot.send_message(call.from_user.id, _("Выберите следущее действие", locale=lang), reply_markup= get_lang_markup(lang, call))
     await state.reset_data()
     if not is_edit:
-        if user.mobile:
+        # if user.mobile:
         # После того, как мы поменяли язык, в этой функции все еще указан старый, поэтому передаем locale=lang
             
-            await bot.send_message(call.from_user.id, _("Добро пожаловать в главное меню!", locale=lang), reply_markup=get_lang_markup(lang, call))
-        else:
-            await bot.send_message(call.from_user.id, _('Отправьте свой номер телефона', locale=lang), reply_markup=get_tel_number(lang))
-            await RegistrationStates.NUMBER.set()
+        await bot.send_message(call.from_user.id, _("Добро пожаловать в главное меню!", locale=lang), reply_markup=get_lang_markup(lang, call))
+        # else:
+        #     await bot.send_message(call.from_user.id, _('Отправьте свой номер телефона', locale=lang), reply_markup=get_tel_number(lang))
+        #     await RegistrationStates.NUMBER.set()
     await call.answer()
 
 @dp.message_handler(content_types=ContentTypes.CONTACT | ContentTypes.TEXT, state=RegistrationStates.NUMBER)
@@ -107,13 +107,13 @@ async def main_menu(msg: Message, state: FSMContext):
     await state.reset_state()
     await state.reset_data()
 
-@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.TITLE)
+@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.MARKA)
 @dp.message_handler(Text(equals=[_("Создать объявление 🆕")]))
 async def __create_article(msg: Message, state: FSMContext):
     await bot.send_message(msg.from_user.id, _("Выберите категрию"), reply_markup=select_article_type_markup)
     await CreateArticleStates.CATEGORY.set()
 
-@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.MARKA)
+@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.MODEL)
 @dp.message_handler(state=CreateArticleStates.CATEGORY)
 async def __select_category(msg: Message, state: FSMContext):
     if msg.text != str(_("⬅️ Назад")) and msg.text in [str(_("❓ Куплю")), str(_("↔️ Обмен")), str(_("❗️ Продам"))]:
@@ -126,20 +126,19 @@ async def __select_category(msg: Message, state: FSMContext):
         return
 
     article.user_id = msg.from_user.id
-    await bot.send_message(msg.from_user.id, _("Введите заголовок"), reply_markup=create_article_default_markup)
-    await CreateArticleStates.TITLE.set()
-    # print(article)
-    await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
-
-@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.MODEL)
-@dp.message_handler(state=CreateArticleStates.TITLE)
-async def __select_title(msg: Message, state: FSMContext):
-    data = await state.get_data()
-    article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
-    article.title = msg.text.replace(str(_("Пропустить ➡️")), "").replace(str(_("⬅️ Назад")), "")
     await bot.send_message(msg.from_user.id, _("Введите марку авто"), reply_markup=create_article_default_markup)
     await CreateArticleStates.MARKA.set()
     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
+
+# @dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.MODEL)
+# @dp.message_handler(state=CreateArticleStates.TITLE)
+# async def __select_title(msg: Message, state: FSMContext):
+#     data = await state.get_data()
+#     article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
+#     article.title = msg.text.replace(str(_("Пропустить ➡️")), "").replace(str(_("⬅️ Назад")), "")
+#     await bot.send_message(msg.from_user.id, _("Введите марку авто"), reply_markup=create_article_default_markup)
+#     await CreateArticleStates.MARKA.set()
+#     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
 
 @dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.YEAR)
 @dp.message_handler(state=CreateArticleStates.MARKA)
@@ -323,7 +322,7 @@ async def __select_photo(msg: Message, state: FSMContext, album: List[Message] =
     data = await state.get_data()
     article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
     article.photo = json.dumps(images)
-    await bot.send_message(user_id, _("Укажите населенный пункт и индекс"), reply_markup=create_article_default_markup)
+    await bot.send_message(user_id, _("Укажите индекс и город"), reply_markup=create_article_default_markup)
     await CreateArticleStates.LOCATION.set()
     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
 

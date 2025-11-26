@@ -81,7 +81,7 @@ def get_sample_from_article(article: Article):
     if article.description:
         text_arr.append(f"{article.description}\n")
     if article.price:
-        text_arr.append(_('Цена: ') + article.price+ "\n")
+        text_arr.append(_('Цена: ') + article.price+ "€\n")
     if article.location:
         text_arr.append(_('Местоположение: ') + article.location+ "\n")
     if article.mobile_number:

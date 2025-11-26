@@ -92,12 +92,6 @@ choose_registration = InlineKeyboardMarkup(
                 InlineKeyboardButton(text=_("ЕС"), callback_data="ЕС")
             ],
             [   
-                InlineKeyboardButton(text=_("Другие страны"), callback_data="Другие страны")
-            ],
-            [   
-                InlineKeyboardButton(text=_("Нет регистрации"), callback_data="Нет регистрации")
-            ],
-            [   
                 InlineKeyboardButton(text=_("⬅️ Назад"), callback_data="cancel")
             ],
         ]
@@ -216,7 +210,7 @@ user_settings_markup = ReplyKeyboardMarkup(
     keyboard=[
         [
             KeyboardButton(text=_("Язык")),
-            KeyboardButton(text=_("Номер телефона"))
+            # KeyboardButton(text=_("Номер телефона"))
         ],
         [
             KeyboardButton(text=_("❌ Отменить"))
