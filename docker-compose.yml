@@ -9,6 +9,8 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - automarkt-network
   db:
     container_name: 'postgres-automarkt'
     image: 'postgres:14'
@@ -22,6 +24,8 @@ services:
         # HOSTNAME: localhost
     volumes:
       - './docker/db:/var/lib/postgresql/data'
+    networks:
+      - automarkt-network
   redis:
     container_name: 'redis-automarkt'
     image: 'redis:latest'
@@ -34,3 +38,8 @@ services:
     volumes:
       - './docker/redis:/usr/local/etc/redis/redis.conf'
       - './docker/redis/data:/data'
+    networks:
+      - automarkt-network
+networks:
+  automarkt-network:  # Создание сети
+    driver: bridge

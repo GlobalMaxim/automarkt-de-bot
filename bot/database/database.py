@@ -30,7 +30,6 @@ async def create_db():
         # print(MYSQL_URI)
         # print('Creating db')
         logger.info('Creating db')
-        MYSQL_URI="postgresql://maxim:qwerty1998@db/automarkt_bot"
         await db.set_bind(MYSQL_URI)
         logger.info('DB Binded')
         # connection = await db.pop_bind().acquire()
@@ -38,7 +37,8 @@ async def create_db():
         await db.gino.create_all()
         logger.info('Database connected successfully')
     except Exception as e:
-        logger.exception(f'Create database exception: {str(e)}')
+        pass
+        # logger.exception(f'Create database exception: {str(e)}')
 
 class User(db.Model):
     __tablename__ = 'users'
