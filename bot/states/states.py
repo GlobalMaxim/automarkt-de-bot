@@ -13,6 +13,7 @@ class CreateArticleStates(StatesGroup):
     CAR_BODY = State()
     ENGINE_TYPE = State()
     ENGINE_CAPACITY = State()
+    GEARBOX_TYPE = State()
     TUF = State()
     REGISTRATION = State()
     DESCRIPTION = State()

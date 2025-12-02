@@ -68,6 +68,7 @@ class Article(db.Model):
     year = Column(TEXT)
     engine_type = Column(TEXT)
     engine_capacity = Column(TEXT)
+    gearbox_type = Column(TEXT)
     body_type = Column(TEXT)
     registration = Column(TEXT)
     tuf = Column(TEXT)

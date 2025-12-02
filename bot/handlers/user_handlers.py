@@ -11,7 +11,7 @@ import re
 import pickle
 import jsonpickle
 
-from bot.keyboards.user_keyboards import choose_language, get_tel_number, user_main_menu_markup, select_article_type_markup, create_article_default_markup, accept_create_article, choose_new_language, choose_car_body, choose_fuel_type, choose_registration, tuf_markup
+from bot.keyboards.user_keyboards import choose_language, get_tel_number, user_main_menu_markup, select_article_type_markup, create_article_default_markup, accept_create_article, choose_new_language, choose_car_body, choose_fuel_type, choose_registration, tuf_markup, gearbox_type_button
 from bot.keyboards.admin_keyboard import admin_main_menu_markup, get_lang_markup
 from bot.states.states import CreateArticleStates, ModerationStates, RegistrationStates
 from bot.database.database import Article, DBCommands, User, DuplicateArticleException
@@ -150,8 +150,8 @@ async def __select_marka(msg: Message, state: FSMContext):
     await CreateArticleStates.MODEL.set()
     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
 
-@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.CAR_BODY)
-@dp.callback_query_handler(text_contains="cancel", state=CreateArticleStates.CAR_BODY)
+@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.GEARBOX_TYPE)
+@dp.callback_query_handler(text_contains="cancel", state=CreateArticleStates.GEARBOX_TYPE)
 @dp.message_handler(state=CreateArticleStates.MODEL)
 async def __select_model(msg: Message | CallbackQuery, state: FSMContext):
     data = await state.get_data()
@@ -164,22 +164,47 @@ async def __select_model(msg: Message | CallbackQuery, state: FSMContext):
     await CreateArticleStates.YEAR.set()
     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
 
-@dp.callback_query_handler(lambda callback: callback.data == "cancel", state=CreateArticleStates.ENGINE_TYPE)
-@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.ENGINE_TYPE)
+@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.CAR_BODY)
+@dp.callback_query_handler(text_contains="cancel", state=CreateArticleStates.CAR_BODY)
 @dp.message_handler(state=CreateArticleStates.YEAR)
 async def __select_year(msg: Message | CallbackQuery, state: FSMContext):
     data = await state.get_data()
     article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
     print(type(msg))
     if isinstance(msg, Message):
-        await bot.send_message(msg.from_user.id, _("☑️☑️☑️"),reply_markup=ReplyKeyboardRemove())
+        # await bot.send_message(msg.from_user.id, _("☑️☑️☑️"),reply_markup=ReplyKeyboardRemove())
         article.year = msg.text.replace(str(_("Пропустить ➡️")), "").replace(str(_("⬅️ Назад")), "")
     else:
         await msg.message.delete()
         article.year = str("").replace(str(_("Пропустить ➡️")), "").replace(str(_("⬅️ Назад")), "")
-    await bot.send_message(msg.from_user.id, _("Выберите кузов авто"),  reply_markup=choose_car_body)
+    await bot.send_message(msg.from_user.id, _("Выберите тип коробки"),  reply_markup=gearbox_type_button)
+    await CreateArticleStates.GEARBOX_TYPE.set()
+    await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
+
+@dp.callback_query_handler(lambda callback: callback.data == "cancel", state=CreateArticleStates.ENGINE_TYPE)
+@dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.ENGINE_TYPE)
+@dp.message_handler(state=CreateArticleStates.GEARBOX_TYPE)
+async def __select_gearbox_type(call: CallbackQuery | Message, state: FSMContext):
+    if isinstance(call, Message):
+        text = call.text
+    else:
+        if call.data == "cancel":
+            text = ""
+        else:
+            text = call.data
+        await call.message.delete()
+    # await call.message.edit_reply_markup()
+    if text not in [_("Автомат"), _("Механика")]:
+        return
+    await bot.send_message(call.from_user.id, _("☑️☑️☑️"),reply_markup=ReplyKeyboardRemove())
+    data = await state.get_data()
+    article: Article = Article(**json.loads(jsonpickle.decode(data['article']))['__values__'])
+    article.gearbox_type = text.replace(str(_("Пропустить ➡️")), "").replace(str(_("⬅️ Назад")), "")
+    await bot.send_message(call.from_user.id, _("Выберите кузов авто"),  reply_markup=choose_car_body)
     await CreateArticleStates.CAR_BODY.set()
     await state.update_data(article=json.dumps(jsonpickle.encode(article, unpicklable=False)))
+    if isinstance(call, CallbackQuery):
+        await call.answer()
 
 @dp.message_handler(Text(equals=[_("⬅️ Назад")]), state=CreateArticleStates.ENGINE_CAPACITY)
 @dp.callback_query_handler(state=CreateArticleStates.CAR_BODY)

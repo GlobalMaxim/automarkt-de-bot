@@ -74,6 +74,8 @@ def get_sample_from_article(article: Article):
         text_arr.append(_('Тип двигателя: ') + article.engine_type+ "\n")
     if article.engine_capacity:
         text_arr.append(_('Обьем двигателя: ') + article.engine_capacity+ "\n")
+    if article.gearbox_type:
+        text_arr.append(_('Тип коробки: ') + article.engine_capacity+ "\n")
     if article.tuf:
         text_arr.append(_('Тюф: ') + article.tuf+ "\n")
     if article.registration:

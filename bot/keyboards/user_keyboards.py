@@ -168,6 +168,21 @@ create_article_default_markup = ReplyKeyboardMarkup(
         resize_keyboard=True
     )
 
+gearbox_type_button = ReplyKeyboardMarkup(
+
+    keyboard=[
+        [
+            KeyboardButton(text=_("Автомат"))
+        ],
+        [
+            KeyboardButton(text=_("Механика"))
+        ],
+        [
+            KeyboardButton(text=_("⬅️ Назад"))
+        ],
+    ]
+)
+
 tuf_markup = ReplyKeyboardMarkup(
         keyboard=[
             [

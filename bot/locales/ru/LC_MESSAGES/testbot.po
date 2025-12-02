@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-11-26 17:14+0100\n"
+"POT-Creation-Date: 2025-12-02 01:27+0100\n"
 "PO-Revision-Date: 2023-07-03 14:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -75,8 +75,8 @@ msgstr ""
 #: bot/handlers/user_handlers.py:98 bot/keyboards/admin_keyboard.py:28
 #: bot/keyboards/admin_keyboard.py:42 bot/keyboards/admin_keyboard.py:55
 #: bot/keyboards/user_keyboards.py:150 bot/keyboards/user_keyboards.py:165
-#: bot/keyboards/user_keyboards.py:179 bot/keyboards/user_keyboards.py:193
-#: bot/keyboards/user_keyboards.py:216
+#: bot/keyboards/user_keyboards.py:194 bot/keyboards/user_keyboards.py:208
+#: bot/keyboards/user_keyboards.py:231
 msgid "❌ Отменить"
 msgstr ""
 
@@ -116,20 +116,22 @@ msgstr ""
 #: bot/handlers/user_handlers.py:119 bot/handlers/user_handlers.py:122
 #: bot/handlers/user_handlers.py:143 bot/handlers/user_handlers.py:148
 #: bot/handlers/user_handlers.py:153 bot/handlers/user_handlers.py:160
-#: bot/handlers/user_handlers.py:168 bot/handlers/user_handlers.py:176
-#: bot/handlers/user_handlers.py:179 bot/handlers/user_handlers.py:184
-#: bot/handlers/user_handlers.py:199 bot/handlers/user_handlers.py:206
-#: bot/handlers/user_handlers.py:221 bot/handlers/user_handlers.py:241
-#: bot/handlers/user_handlers.py:248 bot/handlers/user_handlers.py:253
-#: bot/handlers/user_handlers.py:261 bot/handlers/user_handlers.py:268
-#: bot/handlers/user_handlers.py:274 bot/handlers/user_handlers.py:279
-#: bot/handlers/user_handlers.py:284 bot/handlers/user_handlers.py:289
-#: bot/handlers/user_handlers.py:294 bot/handlers/user_handlers.py:329
-#: bot/handlers/user_handlers.py:334 bot/handlers/user_handlers.py:345
-#: bot/handlers/user_handlers.py:350 bot/handlers/user_handlers.py:369
+#: bot/handlers/user_handlers.py:167 bot/handlers/user_handlers.py:176
+#: bot/handlers/user_handlers.py:179 bot/handlers/user_handlers.py:185
+#: bot/handlers/user_handlers.py:200 bot/handlers/user_handlers.py:209
+#: bot/handlers/user_handlers.py:224 bot/handlers/user_handlers.py:231
+#: bot/handlers/user_handlers.py:246 bot/handlers/user_handlers.py:266
+#: bot/handlers/user_handlers.py:273 bot/handlers/user_handlers.py:278
+#: bot/handlers/user_handlers.py:286 bot/handlers/user_handlers.py:293
+#: bot/handlers/user_handlers.py:299 bot/handlers/user_handlers.py:304
+#: bot/handlers/user_handlers.py:309 bot/handlers/user_handlers.py:314
+#: bot/handlers/user_handlers.py:319 bot/handlers/user_handlers.py:354
+#: bot/handlers/user_handlers.py:359 bot/handlers/user_handlers.py:370
+#: bot/handlers/user_handlers.py:375 bot/handlers/user_handlers.py:394
 #: bot/keyboards/user_keyboards.py:53 bot/keyboards/user_keyboards.py:77
 #: bot/keyboards/user_keyboards.py:95 bot/keyboards/user_keyboards.py:164
-#: bot/keyboards/user_keyboards.py:178 bot/keyboards/user_keyboards.py:191
+#: bot/keyboards/user_keyboards.py:181 bot/keyboards/user_keyboards.py:193
+#: bot/keyboards/user_keyboards.py:206
 msgid "⬅️ Назад"
 msgstr ""
 
@@ -164,13 +166,13 @@ msgstr ""
 
 #: bot/handlers/user_handlers.py:148 bot/handlers/user_handlers.py:160
 #: bot/handlers/user_handlers.py:176 bot/handlers/user_handlers.py:179
-#: bot/handlers/user_handlers.py:199 bot/handlers/user_handlers.py:221
-#: bot/handlers/user_handlers.py:241 bot/handlers/user_handlers.py:253
-#: bot/handlers/user_handlers.py:268 bot/handlers/user_handlers.py:279
-#: bot/handlers/user_handlers.py:289 bot/handlers/user_handlers.py:296
-#: bot/handlers/user_handlers.py:334 bot/handlers/user_handlers.py:350
-#: bot/handlers/user_handlers.py:369 bot/keyboards/user_keyboards.py:160
-#: bot/keyboards/user_keyboards.py:192
+#: bot/handlers/user_handlers.py:200 bot/handlers/user_handlers.py:224
+#: bot/handlers/user_handlers.py:246 bot/handlers/user_handlers.py:266
+#: bot/handlers/user_handlers.py:278 bot/handlers/user_handlers.py:293
+#: bot/handlers/user_handlers.py:304 bot/handlers/user_handlers.py:314
+#: bot/handlers/user_handlers.py:321 bot/handlers/user_handlers.py:359
+#: bot/handlers/user_handlers.py:375 bot/handlers/user_handlers.py:394
+#: bot/keyboards/user_keyboards.py:160 bot/keyboards/user_keyboards.py:207
 msgid "Пропустить ➡️"
 msgstr ""
 
@@ -182,125 +184,129 @@ msgstr ""
 msgid "Введите год авто"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:175 bot/handlers/user_handlers.py:189
-#: bot/handlers/user_handlers.py:255
+#: bot/handlers/user_handlers.py:175 bot/handlers/user_handlers.py:190
+#: bot/handlers/user_handlers.py:214 bot/handlers/user_handlers.py:280
 msgid "☑️☑️☑️"
 msgstr ""
 
 #: bot/handlers/user_handlers.py:180
+msgid "Выберите тип коробки"
+msgstr ""
+
+#: bot/handlers/user_handlers.py:203
 msgid "Выберите кузов авто"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:200
+#: bot/handlers/user_handlers.py:225
 msgid "Выберите тип двигателя"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:222
+#: bot/handlers/user_handlers.py:247
 msgid "Выберите обьем двигателя"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:242
+#: bot/handlers/user_handlers.py:267
 msgid "Тюф годен до: "
 msgstr ""
 
-#: bot/handlers/user_handlers.py:256
+#: bot/handlers/user_handlers.py:281
 msgid "Регистрация авто"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:269
+#: bot/handlers/user_handlers.py:294
 msgid "Описание Авто"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:280
+#: bot/handlers/user_handlers.py:305
 msgid "Введите цену"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:290
+#: bot/handlers/user_handlers.py:315
 msgid "Добавьте фото"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:325
+#: bot/handlers/user_handlers.py:350
 msgid "Укажите индекс и город"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:338
+#: bot/handlers/user_handlers.py:363
 msgid ""
 "Нажмите 'Пропустить', что б автоматически указать логин вашего профиля: "
 "@{}, или введите его вручную"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:340
+#: bot/handlers/user_handlers.py:365
 msgid ""
 "Введите логин телеграм (начинается с @).\n"
 "Нажмите 'Пропустить', что б не указывать его"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:357
+#: bot/handlers/user_handlers.py:382
 msgid ""
 "Введите номер телефона.\n"
 "Нажмите 'Пропустить', что б использовать указанный вами номер: {}"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:359
+#: bot/handlers/user_handlers.py:384
 msgid ""
 "Введите номер телефона (начинается с +).\n"
 "Нажмите 'Пропустить', что б не указывать его"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:372
+#: bot/handlers/user_handlers.py:397
 msgid "Готово! Вы можете посмотреть объявление:"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:386
+#: bot/handlers/user_handlers.py:411
 msgid "Подтвердить? (Да/Нет)"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:394 bot/keyboards/user_keyboards.py:202
+#: bot/handlers/user_handlers.py:419 bot/keyboards/user_keyboards.py:217
 msgid "Да"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:403 bot/handlers/user_handlers.py:423
+#: bot/handlers/user_handlers.py:428 bot/handlers/user_handlers.py:448
 msgid "Ваш пост опубликован в канале"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:436
+#: bot/handlers/user_handlers.py:461
 msgid ""
 "Ваш пост отправлен на модерацию.\n"
 "Как только он будет проверен Администратором, вы получите уведомление"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:440 bot/keyboards/user_keyboards.py:203
+#: bot/handlers/user_handlers.py:465 bot/keyboards/user_keyboards.py:218
 msgid "Нет"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:441
+#: bot/handlers/user_handlers.py:466
 msgid "Создание поста отменено"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:448 bot/keyboards/admin_keyboard.py:9
+#: bot/handlers/user_handlers.py:473 bot/keyboards/admin_keyboard.py:9
 #: bot/keyboards/admin_keyboard.py:66 bot/keyboards/admin_keyboard.py:81
 #: bot/keyboards/user_keyboards.py:133
 msgid "Мои объявления"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:457
+#: bot/handlers/user_handlers.py:482
 msgid "У вас нет активных объявлений 🥺"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:461 bot/keyboards/admin_keyboard.py:37
-#: bot/keyboards/user_keyboards.py:212
+#: bot/handlers/user_handlers.py:486 bot/keyboards/admin_keyboard.py:37
+#: bot/keyboards/user_keyboards.py:227
 msgid "Язык"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:464
+#: bot/handlers/user_handlers.py:489
 msgid "Выбери язык"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:467
+#: bot/handlers/user_handlers.py:492
 msgid "Номер телефона"
 msgstr ""
 
-#: bot/handlers/user_handlers.py:470
+#: bot/handlers/user_handlers.py:495
 msgid "Введите номер"
 msgstr ""
 
@@ -380,11 +386,19 @@ msgstr ""
 msgid "Отправить номер"
 msgstr ""
 
-#: bot/keyboards/user_keyboards.py:174
+#: bot/keyboards/user_keyboards.py:175
+msgid "Автомат"
+msgstr ""
+
+#: bot/keyboards/user_keyboards.py:178
+msgid "Механика"
+msgstr ""
+
+#: bot/keyboards/user_keyboards.py:189
 msgid "Без тюфа"
 msgstr ""
 
-#: bot/keyboards/user_keyboards.py:188
+#: bot/keyboards/user_keyboards.py:203
 msgid "Отправить местоположение 📍"
 msgstr ""
 
@@ -417,49 +431,53 @@ msgid "Обьем двигателя: "
 msgstr ""
 
 #: bot/utils/utils.py:78
-msgid "Тюф: "
+msgid "Тип коробки: "
 msgstr ""
 
 #: bot/utils/utils.py:80
+msgid "Тюф: "
+msgstr ""
+
+#: bot/utils/utils.py:82
 msgid "Регистрация авто: "
 msgstr ""
 
-#: bot/utils/utils.py:84
+#: bot/utils/utils.py:86
 msgid "Цена: "
 msgstr ""
 
-#: bot/utils/utils.py:86
+#: bot/utils/utils.py:88
 msgid "Местоположение: "
 msgstr ""
 
-#: bot/utils/utils.py:88
+#: bot/utils/utils.py:90
 msgid "Номер: "
 msgstr ""
 
-#: bot/utils/utils.py:117
+#: bot/utils/utils.py:119
 msgid ""
 "Обьявление заполнено не полностью.\n"
 "Нужно переделать 🐈"
 msgstr ""
 
-#: bot/utils/utils.py:120
+#: bot/utils/utils.py:122
 msgid ""
 "Вы не указали контактные данные. 🥴\n"
 "Заполните номер телефона или имя пользователя"
 msgstr ""
 
-#: bot/utils/utils.py:125
+#: bot/utils/utils.py:127
 msgid ""
 "Публикация одинаковых постов запрещена.\n"
 "Попробуйте по-другому 🤓"
 msgstr ""
 
-#: bot/utils/utils.py:176
+#: bot/utils/utils.py:178
 msgid "В статье нельзя использовать маты 👊"
 msgstr ""
 
-#: bot/utils/utils.py:198 bot/utils/utils.py:203 bot/utils/utils.py:208
-#: bot/utils/utils.py:215
+#: bot/utils/utils.py:200 bot/utils/utils.py:205 bot/utils/utils.py:210
+#: bot/utils/utils.py:217
 msgid ""
 "У вас {} новых объявлений.\n"
 "Зайдите в модерацию для проверки."
